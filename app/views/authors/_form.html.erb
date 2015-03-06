@@ -1,33 +1,52 @@
-<%= form_for(@author) do |f| %>
-  <% if @author.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+<%= form_for @author, :html => { :class => "form-horizontal author" } do |f| %>
 
-      <ul>
-      <% @author.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @author.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @author.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@author[:name]) %>
   </div>
-  <div class="field">
-    <%= f.label :nationality %><br>
-    <%= f.text_field :nationality %>
+  <div class="control-group">
+    <%= f.label :nationality, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nationality, :class => 'form-control' %>
+    </div>
+    <%= error_span(@author[:nationality]) %>
   </div>
-  <div class="field">
-    <%= f.label :born %><br>
-    <%= f.date_select :born %>
+  <div class="control-group">
+    <%= f.label :born, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :born, :class => 'form-control' %>
+    </div>
+    <%= error_span(@author[:born]) %>
   </div>
-  <div class="field">
-    <%= f.label :died %><br>
-    <%= f.date_select :died %>
+  <div class="control-group">
+    <%= f.label :died, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :died, :class => 'form-control' %>
+    </div>
+    <%= error_span(@author[:died]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            authors_path, :class => 'btn btn-default' %>
+
 <% end %>

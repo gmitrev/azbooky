@@ -1,6 +1,5 @@
-<h1>Editing Book</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @book %> |
-<%= link_to 'Back', books_path %>
+<%- model_class = Book -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= render :partial => 'form' %>

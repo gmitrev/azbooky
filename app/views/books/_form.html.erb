@@ -1,45 +1,66 @@
-<%= form_for(@book) do |f| %>
-  <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+<%= form_for @book, :html => { :class => "form-horizontal book" } do |f| %>
 
-      <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @book.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:title]) %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:description]) %>
   </div>
-  <div class="field">
-    <%= f.label :isbn %><br>
-    <%= f.text_field :isbn %>
+  <div class="control-group">
+    <%= f.label :isbn, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :isbn, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:isbn]) %>
   </div>
-  <div class="field">
-    <%= f.label :lang %><br>
-    <%= f.text_field :lang %>
+  <div class="control-group">
+    <%= f.label :lang, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lang, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:lang]) %>
   </div>
-  <div class="field">
-    <%= f.label :page_count %><br>
-    <%= f.number_field :page_count %>
+  <div class="control-group">
+    <%= f.label :published_in, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :published_in, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:published_in]) %>
   </div>
-  <div class="field">
-    <%= f.label :published_in %><br>
-    <%= f.number_field :published_in %>
+  <div class="control-group">
+    <%= f.label :published_by, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :published_by, :class => 'form-control' %>
+    </div>
+    <%= error_span(@book[:published_by]) %>
   </div>
-  <div class="field">
-    <%= f.label :published_by %><br>
-    <%= f.text_field :published_by %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            books_path, :class => 'btn btn-default' %>
+
 <% end %>
