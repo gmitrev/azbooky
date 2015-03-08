@@ -4,6 +4,10 @@ class Book < ActiveRecord::Base
 
   attr_accessor :author_id
 
+  def author
+    authors.first
+  end
+
   before_save do
     authors << Author.find(author_id) rescue true
   end
