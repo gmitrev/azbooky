@@ -11,8 +11,6 @@
  * file per style scope.
  *
  *= require bootstrap_and_overrides
- *= require authors
- *= require books
- *= require friends
+ *= require public
  *= require_self
  */

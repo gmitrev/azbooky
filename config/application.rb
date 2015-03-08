@@ -30,5 +30,17 @@ module Azbooky
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.to_prepare do
+      Devise::SessionsController.layout "public"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application"   : "public" }
+      Devise::ConfirmationsController.layout "public"
+      Devise::UnlocksController.layout "public"
+      Devise::PasswordsController.layout "public"
+    end
+
+    config.assets.precompile += %w(application.css application_public.css application_public.js)
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
   end
 end

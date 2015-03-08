@@ -1,0 +1,12 @@
+<div class="page-header">
+  <!-- <h1><%#=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1> -->
+</div>
+<table class="table table-striped">
+  <tbody>
+    <% current_user.friends.each do |friend| %>
+      <tr>
+        <td><%= friend.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
