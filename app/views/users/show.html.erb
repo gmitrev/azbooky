@@ -1,0 +1,43 @@
+<%- model_class = User -%>
+
+<div class='row book'>
+  <div class="col-lg-3">
+    <%= gravatar_tag @user.email, :size => 200 %>
+  </div>
+
+  <div class="col-lg-9">
+    <span class='book-title'>
+      <%= @user.email %>
+    </span>
+    <br />
+
+    <% if current_user != @user %>
+
+      <% if current_user.friend_with?(@user) %>
+        <p class='alert alert-info'><%= @user.email %> is your friend!</p>
+      <% elsif @user.pending_invited.include?(current_user) %>
+        <p class='alert alert-info'><%= @user.email %> has not approved your request yet.</p>
+      <% elsif current_user.pending_invited.include?(@user) %>
+        <p class='alert alert-info'>
+        <%= @user.email %> has sent you a friend request.
+        <%= link_to "Approve",
+                      approve_friend_path(@user.id),
+                      :method => 'post',
+                      :class => 'btn btn-success' %>
+        </p>
+      <% else %>
+        <%= link_to "Add as friend",
+                      invite_friend_path(@user.id),
+                      :method => 'post',
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-success' %>
+      <% end %>
+    <% else %>
+      <p class='alert alert-info'>This is you!</p>
+    <% end %>
+  </div>
+</div>
+<h1>Books</h1>
+<div class='row'>
+
+</div>

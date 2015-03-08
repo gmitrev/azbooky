@@ -1,12 +1,50 @@
 <div class="page-header">
-  <!-- <h1><%#=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1> -->
+  <h1>Friends</h1>
 </div>
-<table class="table table-striped">
-  <tbody>
-    <% current_user.friends.each do |friend| %>
-      <tr>
-        <td><%= friend.email %></td>
-      </tr>
+
+<% if current_user.pending_invited.any? %>
+  <div class="row">
+    <div class='col-md-12'>
+      <h3>You have pending friend requests from: </h3>
+      <% current_user.pending_invited.each do |user| %>
+
+        <%= link_to user do %>
+          <%= gravatar_tag user.email, :size => 20 %> <%= user.email %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <hr />
+<% end %>
+
+<% if current_user.friends.any? %>
+
+<% current_user.friends.in_groups_of(4).each do |group| %>
+  <div class='row'>
+    <% group.compact.each do |user| %>
+      <div class='col-md-3' style='text-align: center'>
+        <div class="row">
+        <div class='col-md-12'>
+          <%= link_to user do %>
+            <%= gravatar_tag user.email, :size => 200 %>
+          <% end %>
+        </div>
+        <div class='col-md-12'>
+          <span style='font-size: 15pt'>
+            <%= user.email %>
+          </span>
+        </div>
+
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
+<% else %>
+  <p class='alert alert-info'>
+    You have no friends :(
+  </p>
+<% end %>
+
+<hr />
+<%= link_to 'Find friends', users_path, class: 'btn btn-primary' %>
