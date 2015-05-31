@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .book {
+
   .book-title{
     font-size: 28pt;
   }
@@ -10,4 +11,50 @@
   .book-author{
     font-size: 16pt;
   }
+
+  .book-actions-container{
+
+    .book-i{
+      padding: 0;
+      margin: 0;
+      width: 55px;
+      float: left;
+    }
+
+    .book-actions{
+      float: left;
+      padding: 25px 0 0 0;
+      margin: 0;
+
+      .to-read {
+        background: #FF851B;
+        color: #662F00;
+      }
+
+      .currently-reading {
+        background:  #39CCCC;
+        color: #fff;
+      }
+
+      .read{
+        background: #2ECC40;
+        background:  #3D9970 ;
+        color: #fff;
+      }
+
+      .book-action {
+        padding: 5px 3px;
+        display: block;
+        font-size: 0.7em;
+      }
+    }
+
+  }
+
+  .own-review{
+    #edit-review{
+      font-size: 0.6em;
+    }
+  }
+
 }

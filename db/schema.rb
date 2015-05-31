@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306135045) do
+ActiveRecord::Schema.define(version: 20150531182604) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,30 @@ ActiveRecord::Schema.define(version: 20150306135045) do
   end
 
   add_index "friendships", ["friendable_id", "friend_id"], name: "index_friendships_on_friendable_id_and_friend_id", unique: true
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "shelf_id"
+    t.string   "feeling"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "review"
+  end
+
+  add_index "relationships", ["book_id"], name: "index_relationships_on_book_id"
+  add_index "relationships", ["shelf_id"], name: "index_relationships_on_shelf_id"
+  add_index "relationships", ["user_id"], name: "index_relationships_on_user_id"
+
+  create_table "shelves", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "system"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shelves", ["user_id"], name: "index_shelves_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

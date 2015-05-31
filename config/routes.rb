@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :shelves
+
   devise_for :users
 
   resources :users, only: [:index, :show]
@@ -7,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :authors
 
-  resources :books
+  resources :books do
+    resources :relationships
+  end
 
   resources :friends do
     member do

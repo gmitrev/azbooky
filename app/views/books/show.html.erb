@@ -1,32 +1,100 @@
 <%- model_class = Book -%>
 
-<div class='row book'>
-  <div class="col-lg-3">
-    <%= image_tag "covers/#{@book.isbn}.jpg", class: "img-responsive"%>
+<div class='book'>
+  <div class='row'>
+    <div class="col-lg-3 book-actions-container">
+      <%= image_tag "covers/#{@book.isbn}.jpg", class: "img-responsive"%>
+
+      <div class="book-i">
+        <span style='font-size: 45px; font-family: serif'>I</span>
+        <span style='font-size: 75px'>{</span>
+      </div>
+
+      <div class='book-actions'>
+        <%= link_to book_relationships_path(@book, shelf: 'to-read'), method: :post, class: "book-action #{@relationship.to_read? ? 'to-read' : ''}" do %>
+          <% if @relationship.to_read? %>
+            <i class="fa fa-eye"></i>
+          <% end %>
+          want to read this
+        <% end %>
+        <%= link_to book_relationships_path(@book, shelf: 'currently-reading'), method: :post, class: "book-action #{@relationship.currently_reading? ? 'currently-reading' : ''}" do %>
+          <% if @relationship.currently_reading? %>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+          <% end %>
+          am currently reading this
+        <% end %>
+        <%= link_to book_relationships_path(@book, shelf: 'read'), method: :post, class: "book-action #{@relationship.read? ? 'read' : ''}" do %>
+          <% if @relationship.read? %>
+            <i class="fa fa-check"></i>
+          <% end %>
+          have read this
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="col-lg-9">
+      <span class='book-title'>
+        <%= @book.title %>
+      </span>
+      <br />
+      <span class='book-author'>
+        by
+        <%= link_to @book.author.name, @book.author %>
+      </span>
+      <hr />
+      <p><%= @book.description %></p>
+    </div>
+
+    <% if @relationship.read? %>
+      <div class="col-lg-9 own-review">
+        <hr />
+        <h3>
+          How did you feel about this book?
+        </h3>
+
+        <% if @relationship.feeling.nil? %>
+          <div class="btn-group btn-group-sm btn-group-justified" role="group" aria-label="...">
+            <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'liked' }), method: :put, class: 'btn btn-success', role: 'button' do %>
+              Liked it
+            <% end %>
+            <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'meh' }), method: :put, class: 'btn btn-default', role: 'button' do %>
+              Meh
+            <% end %>
+            <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'disliked' }), method: :put, class: 'btn btn-danger', role: 'button' do %>
+              Disliked it
+            <% end %>
+          </div>
+        <% else %>
+          <%= feeling(@relationship.feeling) %>
+        <% end %>
+
+        <hr />
+
+        <h3>
+          Review <a href="#!" id='edit-review'>edit</a>
+        </h3>
+
+        <%= best_in_place @relationship, :review, url: book_relationship_path(@book, @relationship), as: :textarea, ok_button: "Save", ok_button_class: 'btn btn-success', cancel_button: 'Cancel', cancel_button_class: 'btn btn-danger', inner_class: "form-control", activator: "#edit-review", display_with: :simple_format %>
+
+      </div>
+    <% end %>
   </div>
 
-  <div class="col-lg-9">
-    <span class='book-title'>
-      <%= @book.title %>
-    </span>
-    <br />
-    <span class='book-author'>
-      by
-      <%= link_to @book.author.name, @book.author %>
-    </span>
-    <hr />
-    <p><%= @book.description %></p>
+  <div class="row">
   </div>
 
 </div>
 <hr />
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              books_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_book_path(@book), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              book_path(@book),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<div style='display: none'>
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+                books_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_book_path(@book), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                book_path(@book),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+</div>

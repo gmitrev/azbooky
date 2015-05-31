@@ -11,6 +11,7 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @relationship = current_user.relationships.where(book: @book).first || NullRelationship.new(current_user)
   end
 
   # GET /books/new
