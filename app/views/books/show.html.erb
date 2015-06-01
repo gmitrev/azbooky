@@ -75,7 +75,51 @@
           Review <a href="#!" id='edit-review'>edit</a>
         </h3>
 
-        <%= best_in_place @relationship, :review, url: book_relationship_path(@book, @relationship), as: :textarea, ok_button: "Save", ok_button_class: 'btn btn-success', cancel_button: 'Cancel', cancel_button_class: 'btn btn-danger', inner_class: "form-control", activator: "#edit-review", display_with: :simple_format %>
+        <%= best_in_place @relationship, :review, url: book_relationship_path(@book, @relationship), as: :textarea, ok_button: "Save", ok_button_class: 'btn btn-success', cancel_button: 'Cancel', cancel_button_class: 'btn btn-danger', inner_class: "form-control", activator: "#edit-review", display_with: :simple_format, place_holder: 'You have not reviewed this book yet', skip_blur: true %>
+
+      </div>
+
+
+    <% end %>
+
+    <% if @friends_reviews.any? %>
+
+      <div class="col-lg-12">
+        <hr />
+        <h3>
+          What your friends have to say
+        </h3>
+
+        <% @friends_reviews.each do |review| %>
+          <div class="well">
+            <%= gravatar_tag review.user.email, :size => 40 %>
+            <%= review.user.email %>
+            on <%= l review.created_at.to_date %>
+          <hr />
+            <%= simple_format review.review %>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+
+    <% if @other_reviews.any? %>
+
+      <div class="col-lg-12">
+        <hr />
+        <h3>
+          What other people have to say
+        </h3>
+
+        <% @friends_reviews.each do |review| %>
+          <div class="well">
+            <%= gravatar_tag review.user.email, :size => 40 %>
+            <%= review.user.email %>
+            on <%= l review.created_at.to_date %>
+          <hr />
+            <%= simple_format review.review %>
+          </div>
+        <% end %>
 
       </div>
     <% end %>

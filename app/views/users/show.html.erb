@@ -36,8 +36,17 @@
       <p class='alert alert-info'>This is you!</p>
     <% end %>
   </div>
-</div>
-<h1>Books</h1>
-<div class='row'>
-
+  <div class='col-lg-9'>
+    <h3>Recent activity</h3>
+    <% if @activities.any? %>
+      <% @activities.each do |activity| %>
+        <div class='well'>
+          <%= image_tag "covers/#{activity.object.isbn}.jpg", height: '100px' %>
+          <%= render partial: "activities/#{activity.activity_type.underscore}.html.erb", locals: { book: activity.object, user: activity.user } %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="alert alert-info" role="alert">This user has not done anything yet!</div>
+    <% end %>
+  </div>
 </div>

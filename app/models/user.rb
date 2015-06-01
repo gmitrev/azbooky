@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :shelves
   has_many :relationships, dependent: :destroy
   has_many :books, through: :relationships
+  has_many :activities
 
   after_save :create_default_shelves
 
@@ -24,10 +25,16 @@ class User < ActiveRecord::Base
     message = MESSAGES[shelf_name]
 
     if relationship.update_column(:shelf_id, shelf.id)
+      Activity.create(user: self, object: book, activity_type: shelf_name)
+
       [true, message]
     else
       [false, relationship.errors.join(". ")]
     end
+  end
+
+  def latest_activities(num=20)
+    activities.order("created_at DESC").limit(20)
   end
 
   private
