@@ -14,7 +14,7 @@ class BooksController < ApplicationController
     @relationship = current_user.relationships.where(book: @book).first || NullRelationship.new(current_user)
 
     @friends_reviews = Relationship.where(book: @book, user_id: current_user.friends.pluck(:id))
-    @other_reviews = Relationship.where(book: @book) - @friends_reviews - [@relationship]
+    @other_reviews = Relationship.where(book: @book).all - @friends_reviews - [@relationship]
   end
 
   # GET /books/new

@@ -103,7 +103,7 @@
 
         <% @friends_reviews.each do |review| %>
           <div class="well">
-            <%= gravatar_tag review.user.email, :size => 40 %>
+            <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
             <%= review.user.email %>
             on <%= l review.created_at.to_date %>
           <hr />
@@ -122,9 +122,9 @@
           What other people have to say
         </h3>
 
-        <% @friends_reviews.each do |review| %>
+        <% @other_reviews.each do |review| %>
           <div class="well">
-            <%= gravatar_tag review.user.email, :size => 40 %>
+            <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
             <%= review.user.email %>
             on <%= l review.created_at.to_date %>
           <hr />

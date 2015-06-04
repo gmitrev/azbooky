@@ -9,7 +9,7 @@
       <% current_user.pending_invited.each do |user| %>
 
         <%= link_to user do %>
-          <%= gravatar_tag user.email, :size => 20 %> <%= user.email %>
+          <%= gravatar_tag user.email, :size => 20, default: :identicon %> <%= user.email %>
         <% end %>
       <% end %>
     </div>
@@ -26,11 +26,11 @@
         <div class="row">
         <div class='col-md-12'>
           <%= link_to user do %>
-            <%= gravatar_tag user.email, :size => 200 %>
+            <%= gravatar_tag user.email, :size => 200, default: :identicon %>
           <% end %>
         </div>
         <div class='col-md-12'>
-          <span style='font-size: 15pt'>
+          <span style='font-size: 11pt'>
             <%= user.email %>
           </span>
         </div>
