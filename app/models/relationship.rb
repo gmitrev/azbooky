@@ -6,6 +6,10 @@ class Relationship < ActiveRecord::Base
   delegate :to_read?, to: :shelf
   delegate :currently_reading?, to: :shelf
   delegate :read?, to: :shelf
+
+  def null?
+    false
+  end
 end
 
 class NullRelationship
@@ -25,5 +29,13 @@ class NullRelationship
 
   def currently_reading?
     false
+  end
+
+  def favourite?
+    false
+  end
+
+  def null?
+    true
   end
 end

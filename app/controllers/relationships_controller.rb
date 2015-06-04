@@ -30,6 +30,16 @@ class RelationshipsController < ApplicationController
     end
   end
 
+  def star
+    rel = current_user.relationships.find(params[:id])
+
+    if rel
+      rel.update_attribute(:favourite, !rel.favourite)
+    end
+
+    redirect_to :back
+  end
+
   private
 
   def relationship_params

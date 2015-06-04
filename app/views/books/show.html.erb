@@ -34,6 +34,17 @@
     </div>
 
     <div class="col-lg-9">
+      <% unless @relationship.null? %>
+        <div class="book-star">
+          <%= link_to star_book_relationship_path(@book, @relationship), method: :post do %>
+            <% if @relationship.favourite? %>
+              <i class="star-yellow fa fa-star"></i>
+            <% else %>
+              <i class="star-gray fa fa-star-o"></i>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
       <span class='book-title'>
         <%= @book.title %>
       </span>

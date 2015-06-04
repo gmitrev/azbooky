@@ -4,6 +4,23 @@
 
 .book {
 
+  .book-star {
+    float: right;
+    padding-top: 13px;
+    font-size: 20pt;
+
+    .star-yellow {
+      color: #FFDC00
+    }
+
+    .star-gray {
+      color:  #DDD;
+
+      &:hover{
+        color: #aaa;
+      }
+    }
+  }
   .book-title{
     font-size: 28pt;
   }

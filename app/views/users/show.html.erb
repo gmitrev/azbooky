@@ -1,5 +1,36 @@
 <%- model_class = User -%>
 
+<% content_for :sidebar do %>
+  <div class="well friends">
+    <h3>Friends</h3>
+      <div class='row'>
+        <% 10.times do %>
+          <div class='col-md-3 friend'>
+            <%= link_to @user do %>
+              <%= gravatar_tag @user.email, :size => 40 %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+  </div><!--/.well -->
+
+  <div class="well favourites">
+    <h3>Favourite books</h3>
+      <div class='row'>
+        <% @favourites.each do |rel| %>
+          <div class='col-md-4 '>
+            <%= link_to rel.book do %>
+              <%= image_tag "covers/#{rel.book.isbn}.jpg", class: "img-responsive"%>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+  </div><!--/.well -->
+
+<% end %>
+
 <div class='row book'>
   <div class="col-lg-3">
     <%= gravatar_tag @user.email, :size => 200 %>
@@ -36,6 +67,15 @@
       <p class='alert alert-info'>This is you!</p>
     <% end %>
   </div>
+  <% if @currently_reading %>
+    <div class='col-lg-9'>
+      <h3>Currently reading</h3>
+        <div class='well'>
+          <%= image_tag "covers/#{@currently_reading.isbn}.jpg", height: '100px' %>
+          <%= @user.email %> is currently reading <%= @currently_reading.title %>
+        </div>
+    </div>
+  <% end %>
   <div class='col-lg-9'>
     <h3>Recent activity</h3>
     <% if @activities.any? %>

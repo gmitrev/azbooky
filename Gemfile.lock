@@ -36,7 +36,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    amistad (0.10.2)
     arel (6.0.0)
     bcrypt (3.1.10)
     best_in_place (3.0.3)
@@ -186,7 +185,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  amistad
   best_in_place
   coffee-rails (~> 4.1.0)
   devise

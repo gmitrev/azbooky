@@ -14,5 +14,6 @@
  *= require authors
  *= require books
  *= require friends
+ *= require users
  *= require_self
  */

@@ -12,4 +12,8 @@ class Shelf < ActiveRecord::Base
   def read?
     name == 'read'
   end
+
+  def self.currently_reading(user)
+    find_by(name: 'currently-reading', user: user)
+  end
 end

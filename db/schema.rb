@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601184025) do
+ActiveRecord::Schema.define(version: 20150604173233) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150601184025) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text     "review"
+    t.boolean  "favourite"
   end
 
   add_index "relationships", ["book_id"], name: "index_relationships_on_book_id"

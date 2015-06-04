@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :authors
 
   resources :books do
-    resources :relationships
+    resources :relationships do
+      member do
+        post :star
+      end
+    end
   end
 
   resources :friends do
