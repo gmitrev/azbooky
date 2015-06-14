@@ -9,7 +9,11 @@
       <% current_user.pending_invited.each do |user| %>
 
         <%= link_to user do %>
-          <%= gravatar_tag user.email, :size => 20, default: :identicon %> <%= user.email %>
+          <% if Rails.env.production? %>
+            <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %> <%= user.email %>
+          <% else %>
+            <%= gravatar_tag user.email, :size => 20, default: :identicon %> <%= user.email %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -24,16 +28,15 @@
     <% group.compact.each do |user| %>
       <div class='col-md-3' style='text-align: center'>
         <div class="row">
-        <div class='col-md-12'>
-          <%= link_to user do %>
-            <%= gravatar_tag user.email, :size => 200, default: :identicon %>
-          <% end %>
-        </div>
-        <div class='col-md-12'>
-          <span style='font-size: 11pt'>
-            <%= user.email %>
-          </span>
-        </div>
+          <div class='col-md-12' style='margin-bottom: 15px'>
+            <%= link_to user do %>
+              <% if Rails.env.production? %>
+                <%= gravatar_tag user.email, :size => 200, default: :identicon %> <%= user.email %>
+              <% else %>
+                <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %> <%= user.email %>
+              <% end %>
+            <% end %>
+          </div>
 
         </div>
       </div>

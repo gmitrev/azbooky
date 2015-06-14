@@ -7,7 +7,11 @@
         <% @user.friends.each do |friend| %>
           <div class='col-md-3 friend'>
             <%= link_to friend do %>
-              <%= gravatar_tag friend.email, :size => 40, default: :identicon %>
+              <% if Rails.env.production? %>
+                <%= image_tag "avatars/#{friend.avatar}", height: '45px', width: '45px' %>
+              <% else %>
+                <%= gravatar_tag friend.email, :size => 40, default: :identicon %>
+              <% end %>
             <% end %>
           </div>
         <% end %>
@@ -33,7 +37,11 @@
 
 <div class='row book'>
   <div class="col-lg-3">
-    <%= gravatar_tag @user.email, :size => 200, default: 'identicon' %>
+    <% if Rails.env.production? %>
+      <%= gravatar_tag @user.email, :size => 200, default: 'identicon' %>
+    <% else %>
+      <%= image_tag "avatars/#{@user.avatar}", height: '128px', width: '128px' %>
+    <% end %>
   </div>
 
   <div class="col-lg-9">

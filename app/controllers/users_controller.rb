@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @not_friends = User.all - [current_user] - current_user.friends
   end
 
   def show

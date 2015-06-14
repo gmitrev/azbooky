@@ -103,7 +103,11 @@
 
         <% @friends_reviews.each do |review| %>
           <div class="well">
-            <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
+            <% if Rails.env.production? %>
+              <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
+            <% else %>
+              <%= image_tag "avatars/#{review.user.avatar}", height: '128px', width: '128px' %>
+            <% end %>
             <%= review.user.email %>
             on <%= l review.created_at.to_date %>
           <hr />
@@ -124,7 +128,13 @@
 
         <% @other_reviews.each do |review| %>
           <div class="well">
-            <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
+
+            <% if Rails.env.production? %>
+              <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
+            <% else %>
+              <%= image_tag "avatars/#{review.user.avatar}", height: '128px', width: '128px' %>
+            <% end %>
+
             <%= review.user.email %>
             on <%= l review.created_at.to_date %>
           <hr />

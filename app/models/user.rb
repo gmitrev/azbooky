@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
 
   def invite(user)
     return false if user == self || find_any_friendship_with(user)
-    Friendship.crate(friendable: self, friend: user)
+    Friendship.create(friendable: self, friend: user)
   end
 
   def approve(user)

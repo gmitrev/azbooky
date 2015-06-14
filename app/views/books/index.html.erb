@@ -3,15 +3,15 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<% Book.all.in_groups_of(4).each do |group| %>
+<% @books.all.in_groups_of(4).each do |group| %>
   <div class='row'>
     <% group.compact.each do |book| %>
-      <div class='col-md-3' style='text-align: center'>
+      <div class='col-md-3' style='text-align: center; margin-bottom: 15px'>
         <%= link_to book do %>
           <%= image_tag "covers/#{book.isbn}.jpg", size: '186x266' %>
         <% end %>
         <span style='font-size: 15pt'>
-          <%= book.author.name %>
+          <%= book.title %>
         </span>
       </div>
     <% end %>

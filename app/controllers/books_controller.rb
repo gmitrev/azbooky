@@ -5,7 +5,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if params[:filter] == 'own'
+      @books = current_user.books
+    else
+      @books = Book.all
+    end
   end
 
   # GET /books/1

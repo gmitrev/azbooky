@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
+gem 'pg'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -17,6 +18,8 @@ gem 'devise'
 gem 'gravatarify', '~> 3.0.0'
 gem 'best_in_place'
 gem 'faker'
+gem 'rails-erd'
+gem 'railroady'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

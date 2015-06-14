@@ -1,6 +1,8 @@
 class Shelf < ActiveRecord::Base
   belongs_to :user
 
+  has_many :relationships
+
   def to_read?
     name == 'to-read'
   end

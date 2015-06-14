@@ -3,14 +3,18 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<% (User.all - [current_user]).in_groups_of(4).each do |group| %>
+<% @not_friends.in_groups_of(4).each do |group| %>
   <div class='row'>
     <% group.compact.each do |user| %>
       <div class='col-md-3' style='text-align: center'>
         <div class="row">
         <div class='col-md-12'>
           <%= link_to user do %>
-            <%= gravatar_tag user.email, :size => 200, default: 'identicon' %>
+            <% if Rails.env.production? %>
+              <%= gravatar_tag user.email, :size => 200, default: 'identicon' %>
+            <% else %>
+              <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %>
+            <% end %>
           <% end %>
         </div>
         <div class='col-md-12'>
