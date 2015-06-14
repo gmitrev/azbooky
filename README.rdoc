@@ -1,6 +1,4 @@
-== University Project - Advanced OOP
+== Azbooky
+=== An open-source reading social network
 
-
-Using Ruby on Rails
-
-Created by Georgi Mitrev
+A playground for my universtity thesis.
