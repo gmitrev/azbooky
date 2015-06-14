@@ -41,11 +41,11 @@ class User < ActiveRecord::Base
   end
 
   def likes
-    relationships.includes(:book).where(feeling: 'liked').flat_map(&:book)
+    books.where('relationships.feeling = ?', 'liked')
   end
 
   def dislikes
-    relationships.includes(:book).where(feeling: 'disliked').flat_map(&:book)
+    books.where('relationships.feeling = ?', 'disliked')
   end
 
   def to_s

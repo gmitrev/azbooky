@@ -39,6 +39,8 @@ module Recommendable
   end
 
   def recommendations(n)
-    Book.all.sort_by { |b| self.prediction_for(b) }.reverse.take(n)
+    user_books = books.pluck(:id)
+    pool = Book.where('id NOT IN (?)', user_books)
+    pool.sort_by { |b| self.prediction_for(b) }.reverse.take(n)
   end
 end

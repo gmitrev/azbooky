@@ -6,8 +6,8 @@
       <%= image_tag "covers/#{@book.isbn}.jpg", class: "img-responsive"%>
 
       <div class="book-i">
-        <span style='font-size: 45px; font-family: serif'>I</span>
-        <span style='font-size: 75px; font-family: serif'>{</span>
+        <span style='font-size: 35px; font-family: serif'>I</span>
+        <span style='font-size: 75px; font-family: Liberation Sans'>{</span>
       </div>
 
       <div class='book-actions'>
@@ -18,9 +18,6 @@
           want to read this
         <% end %>
         <%= link_to book_relationships_path(@book, shelf: 'currently-reading'), method: :post, class: "book-action #{@relationship.currently_reading? ? 'currently-reading' : ''}" do %>
-          <% if @relationship.currently_reading? %>
-            <i class="fa fa-circle-o-notch fa-spin"></i>
-          <% end %>
           am currently reading this
         <% end %>
         <%= link_to book_relationships_path(@book, shelf: 'read'), method: :post, class: "book-action #{@relationship.read? ? 'read' : ''}" do %>

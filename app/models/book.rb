@@ -12,7 +12,7 @@ class Book < ActiveRecord::Base
   end
 
   def liked_by
-    relationships.includes(:user).where(feeling: 'liked').map(&:user)
+    users.includes(:books).where('relationships.feeling = ?', 'liked')
   end
 
   def liked_by_friends_of(user)
@@ -20,7 +20,7 @@ class Book < ActiveRecord::Base
   end
 
   def disliked_by
-    relationships.includes(:user).where(feeling: 'disliked').map(&:user)
+    users.where('relationships.feeling = ?', 'disliked')
   end
 
   def disliked_by_friends_of(user)

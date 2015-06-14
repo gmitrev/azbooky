@@ -17,8 +17,8 @@ class BooksController < ApplicationController
   def show
     @relationship = current_user.relationships.where(book: @book).first || NullRelationship.new(current_user)
 
-    @friends_reviews = Relationship.where(book: @book, user_id: current_user.friends.pluck(:id))
-    @other_reviews = Relationship.where(book: @book).all - @friends_reviews - [@relationship]
+    @friends_reviews = Relationship.includes(:user).where(book: @book, user_id: current_user.friends.pluck(:id))
+    @other_reviews = Relationship.includes(:user).where(book: @book).all - @friends_reviews - [@relationship]
   end
 
   # GET /books/new
@@ -71,14 +71,14 @@ class BooksController < ApplicationController
   end
 
   def recommendations
-    # @recommended = current_user.recommendations(4)
-    @recommended = Book.includes([:relationships => [:user => [:relationships => [:book]]]]).limit(4).to_a
+    @recommended = current_user.recommendations(4)
+    # @recommended = Book.includes([:relationships => [:user => [:relationships => [:book]]]]).limit(4).to_a
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = Book.includes([:users => [:books => [:users]]]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
