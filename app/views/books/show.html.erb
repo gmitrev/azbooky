@@ -7,7 +7,7 @@
 
       <div class="book-i">
         <span style='font-size: 45px; font-family: serif'>I</span>
-        <span style='font-size: 75px'>{</span>
+        <span style='font-size: 75px; font-family: serif'>{</span>
       </div>
 
       <div class='book-actions'>
@@ -55,6 +55,15 @@
       </span>
       <hr />
       <p><%= @book.description %></p>
+      <hr />
+      <div class='book-info'>
+        Pages: <%= @book.page_count %> <br />
+        ISBN: <%= @book.isbn %> <br />
+        Published in: <%= @book.published_in %> <br />
+        Published by: <%= @book.published_by %> <br />
+        Recommendation prediction:
+        <%= prediction(current_user.prediction_for(@book)) %>
+      </div>
     </div>
 
     <% if @relationship.read? %>
@@ -106,7 +115,7 @@
             <% if Rails.env.production? %>
               <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
             <% else %>
-              <%= image_tag "avatars/#{review.user.avatar}", height: '128px', width: '128px' %>
+              <%= image_tag "avatars/#{review.user.avatar}", height: '64px', width: '64px' %>
             <% end %>
             <%= review.user.email %>
             on <%= l review.created_at.to_date %>
@@ -132,7 +141,7 @@
             <% if Rails.env.production? %>
               <%= gravatar_tag review.user.email, :size => 40, default: :identicon %>
             <% else %>
-              <%= image_tag "avatars/#{review.user.avatar}", height: '128px', width: '128px' %>
+              <%= image_tag "avatars/#{review.user.avatar}", height: '64px', width: '64px' %>
             <% end %>
 
             <%= review.user.email %>

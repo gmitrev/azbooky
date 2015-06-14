@@ -1,0 +1,59 @@
+<% content_for :main_class do %>
+  col-lg-12
+<% end %>
+
+<%- model_class = Book -%>
+<div class="page-header">
+  <h1>Recommendations</h1>
+</div>
+
+<h3>Personal recommendations</h3>
+<% @recommended.in_groups_of(2).each do |group| %>
+  <div class='row'>
+    <% group.each do |book| %>
+      <div class='col-md-2' style='text-align: center; margin-bottom: 15px'>
+        <%= link_to book do %>
+          <%= image_tag "covers/#{book.isbn}.jpg", size: '186x266' %>
+        <% end %>
+      </div>
+      <div class='col-md-4'>
+          <p style='font-size: 18pt'>
+            <%= link_to book do %>
+              <%= book.title %>
+            <% end %>
+          </p>
+        <p>
+          by <%= link_to book.author.name, book.author %>
+        </p>
+
+        <br />
+        <p>
+          <strong>
+            Friends who like it:
+          </strong>
+        </p>
+        <% book.liked_by_friends_of(current_user).take(20).each do |user| %>
+          <%= link_to user, title: user.email do %>
+            <% if Rails.env.production? %>
+              <%= gravatar_tag user.email, :size => 40, default: 'identicon' %>
+            <% else %>
+              <%= image_tag "avatars/#{user.avatar}", height: '32px', width: '32px' %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <br />
+        <br />
+        <p>
+          <strong>
+            Recommendation prediction index:
+          </strong>
+        </p>
+        <%= prediction(current_user.prediction_for(book)) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_book_path,
+            :class => 'btn btn-primary' %>

@@ -15,5 +15,9 @@
  *= require books
  *= require friends
  *= require users
+ *= require nprogress
+ *= require nprogress-bootstrap
  *= require_self
  */
+
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300,700);

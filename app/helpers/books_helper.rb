@@ -17,4 +17,22 @@ module BooksHelper
     end
   end
 
+  def prediction(index)
+    index = index.round(3)
+    case
+    when index > 0.01
+      content_tag 'span', style: 'color: #2ECC40' do
+        index.to_s
+      end
+    when index < -0.01
+      content_tag 'span', style: 'color: #FF4136' do
+        index.to_s
+      end
+    else
+      content_tag 'span', style: 'color: #7FDBFF' do
+        index.to_s
+      end
+    end
+  end
+
 end

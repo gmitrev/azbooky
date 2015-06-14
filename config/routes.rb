@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:index, :show]
+  get 'recommendations' => 'books#recommendations'
   root to: "books#index"
 
   resources :authors

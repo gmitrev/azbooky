@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require best_in_place
 //= require twitter/bootstrap
+//= require nprogress
+//= require nprogress-turbolinks
 //= require turbolinks
 //= require_tree .
 

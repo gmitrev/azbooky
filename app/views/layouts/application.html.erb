@@ -54,7 +54,7 @@
           <ul class="nav navbar-nav">
               <li><%= link_to "My books", books_path(filter: 'own') %></li>
               <li><%= link_to "All books", books_path %></li>
-              <li><%= link_to "Recommendations", "/path2"  %></li>
+              <li><%= link_to "Recommendations", recommendations_path %></li>
               <li>
                 <%= link_to friends_path do %>
                   Friends
@@ -92,7 +92,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="<%= content_for?(:main_class) ? yield(:main_class) : "col-lg-9" %>">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

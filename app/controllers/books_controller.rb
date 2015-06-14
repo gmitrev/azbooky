@@ -70,6 +70,11 @@ class BooksController < ApplicationController
     end
   end
 
+  def recommendations
+    # @recommended = current_user.recommendations(4)
+    @recommended = Book.limit(4).to_a
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

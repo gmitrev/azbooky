@@ -23,10 +23,15 @@
   }
   .book-title{
     font-size: 28pt;
+    font-weight: 300;
   }
 
   .book-author{
     font-size: 16pt;
+  }
+
+  .book-info {
+    color: #999;
   }
 
   .book-actions-container{
@@ -39,6 +44,7 @@
     }
 
     .book-actions{
+      font-family: serif;
       float: left;
       padding: 25px 0 0 0;
       margin: 0;

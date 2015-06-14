@@ -10,4 +10,5 @@ class UsersController < ApplicationController
     @currently_reading = Relationship.where(shelf: @currently_reading_shelf, user: @user).try(:first).try(:book)
     @favourites = @user.relationships.where(favourite: true)
   end
+
 end
