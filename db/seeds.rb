@@ -5,8 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-u1 = User.create(email: 'gvmitrev@gmail.com', password: "12345678", avatar: 'gvmitrev.jpg')
-u2 = User.create(email: 'gmitrev@hotmail.com', password: "12345678", avatar: 'gmitrev.png')
+u1 = User.create(name: "Georgi Mitrev", email: 'gvmitrev@gmail.com', password: "12345678", avatar: 'gvmitrev.jpg')
+u2 = User.create(name: "Patrick Rothfuss", email: 'gmitrev@hotmail.com', password: "12345678", avatar: 'gmitrev.png')
 
 # Add a bunch of authors
 orwell = Author.create(name: 'George Orwell', nationality: 'gbr', born: Date.parse('25 June 1903'), died: Date.parse('21 January 1950'))
@@ -119,7 +119,7 @@ pump.authors << bacigalupi
 
 Friendship.create(friendable: u1 , friend: u2, pending: false)
 20.times do |i|
-  User.create(email: Faker::Internet.free_email, password: "12345678", avatar: "#{i+1}.jpg")
+  User.create(name: Faker::Name.name, email: Faker::Internet.free_email, password: "12345678", avatar: "#{i+1}.jpg")
 end
 
 User.all.each do |u|

@@ -6,7 +6,7 @@
       <div class='row'>
         <% @user.friends.each do |friend| %>
           <div class='col-md-3 friend'>
-            <%= link_to friend do %>
+            <%= link_to friend, title: friend.name do %>
               <% if Rails.env.production? %>
                 <%= image_tag "avatars/#{friend.avatar}", height: '45px', width: '45px' %>
               <% else %>
@@ -24,7 +24,7 @@
       <div class='row'>
         <% @favourites.each do |rel| %>
           <div class='col-md-4 '>
-            <%= link_to rel.book do %>
+            <%= link_to rel.book, title: rel.book.title do %>
               <%= image_tag "covers/#{rel.book.isbn}.jpg", class: "img-responsive"%>
             <% end %>
           </div>
@@ -46,7 +46,7 @@
 
   <div class="col-lg-9">
     <span class='book-title'>
-      <%= @user.email %>
+      <%= @user %>
     </span>
     <br />
 
@@ -54,12 +54,12 @@
       <p class='alert alert-success'>Your similarity with this user is <%= current_user.similarity_with(@user) %></p>
 
       <% if current_user.friend_with?(@user) %>
-        <p class='alert alert-info'><%= @user.email %> is your friend!</p>
+        <p class='alert alert-info'><%= @user %> is your friend!</p>
       <% elsif @user.pending_invited.include?(current_user) %>
-        <p class='alert alert-info'><%= @user.email %> has not approved your request yet.</p>
+        <p class='alert alert-info'><%= @user %> has not approved your request yet.</p>
       <% elsif current_user.pending_invited.include?(@user) %>
         <p class='alert alert-info'>
-        <%= @user.email %> has sent you a friend request.
+        <%= @user %> has sent you a friend request.
         <%= link_to "Approve",
                       approve_friend_path(@user.id),
                       :method => 'post',
@@ -81,7 +81,7 @@
       <h3>Currently reading</h3>
         <div class='well'>
           <%= image_tag "covers/#{@currently_reading.isbn}.jpg", height: '100px' %>
-          <%= @user.email %> is currently reading <%= @currently_reading.title %>
+          <%= @user %> is currently reading <%= @currently_reading.title %>
         </div>
     </div>
   <% end %>

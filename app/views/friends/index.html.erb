@@ -10,9 +10,9 @@
 
         <%= link_to user do %>
           <% if Rails.env.production? %>
-            <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %> <%= user.email %>
+            <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %> <%= user %>
           <% else %>
-            <%= gravatar_tag user.email, :size => 20, default: :identicon %> <%= user.email %>
+            <%= gravatar_tag user.email, :size => 20, default: :identicon %> <%= user %>
           <% end %>
         <% end %>
       <% end %>
@@ -31,9 +31,13 @@
           <div class='col-md-12' style='margin-bottom: 15px'>
             <%= link_to user do %>
               <% if Rails.env.production? %>
-                <%= gravatar_tag user.email, :size => 200, default: :identicon %> <%= user.email %>
+                <%= gravatar_tag user.email, :size => 200, default: :identicon %>
+                <br />
+              <%= user %>
               <% else %>
-                <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %> <%= user.email %>
+                <%= image_tag "avatars/#{user.avatar}", height: '128px', width: '128px' %>
+                <br />
+              <%= user %>
               <% end %>
             <% end %>
           </div>

@@ -72,7 +72,7 @@ class BooksController < ApplicationController
 
   def recommendations
     # @recommended = current_user.recommendations(4)
-    @recommended = Book.limit(4).to_a
+    @recommended = Book.includes([:relationships => [:user => [:relationships => [:book]]]]).limit(4).to_a
   end
 
   private

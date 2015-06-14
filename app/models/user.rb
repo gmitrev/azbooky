@@ -48,7 +48,9 @@ class User < ActiveRecord::Base
     relationships.includes(:book).where(feeling: 'disliked').flat_map(&:book)
   end
 
-  # Friendship methods
+  def to_s
+    name
+  end
 
   private
 

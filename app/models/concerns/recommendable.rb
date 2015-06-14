@@ -2,8 +2,6 @@ module Recommendable
   extend ActiveSupport::Concern
 
   def similarity_with(user)
-    user = User.includes(:books).find(user.id)
-
     agreements = (self.likes & user.likes).size
     agreements += (self.dislikes & user.dislikes).size
 

@@ -4,7 +4,9 @@
 
   <%= devise_error_messages! %>
 
-  <%= f.email_field :email, placeholder: "Email", required: 'required', class: 'form-control input-lg', autofocus: true %>
+  <%= f.text_field :name, placeholder: "Name", required: 'required', class: 'form-control input-lg', autofocus: true %>
+
+  <%= f.email_field :email, placeholder: "Email", required: 'required', class: 'form-control input-lg', autofocus: false %>
 
   <%= f.password_field :password, placeholder: "Password", autocomplete: "off", required: true, class: 'form-control input-lg' %>
 

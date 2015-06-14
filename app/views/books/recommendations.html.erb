@@ -8,7 +8,7 @@
 </div>
 
 <h3>Personal recommendations</h3>
-<% @recommended.in_groups_of(2).each do |group| %>
+<% @recommended.in_groups_of(2, false).each do |group| %>
   <div class='row'>
     <% group.each do |book| %>
       <div class='col-md-2' style='text-align: center; margin-bottom: 15px'>
@@ -33,7 +33,7 @@
           </strong>
         </p>
         <% book.liked_by_friends_of(current_user).take(20).each do |user| %>
-          <%= link_to user, title: user.email do %>
+          <%= link_to user, title: user do %>
             <% if Rails.env.production? %>
               <%= gravatar_tag user.email, :size => 40, default: 'identicon' %>
             <% else %>
