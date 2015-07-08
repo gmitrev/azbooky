@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :shelves
-  has_many :relationships, dependent: :destroy
+  has_many :relationships, dependent: :destroy, inverse_of: :user
   has_many :books, through: :relationships
   has_many :activities
 

@@ -1,6 +1,6 @@
 class Relationship < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :book
+  belongs_to :user, inverse_of: :relationships
+  belongs_to :book, inverse_of: :relationships
   belongs_to :shelf
 
   delegate :to_read?, to: :shelf

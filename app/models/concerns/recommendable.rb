@@ -38,7 +38,7 @@ module Recommendable
     rating / rated_by.to_f
   end
 
-  def recommendations(n)
+  def recommendations(n=4)
     user_books = books.pluck(:id)
     pool = Book.where('id NOT IN (?)', user_books)
     pool.sort_by { |b| self.prediction_for(b) }.reverse.take(n)

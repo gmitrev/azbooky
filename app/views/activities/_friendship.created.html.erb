@@ -1,0 +1,7 @@
+<% if Rails.env.production? %>
+  <%= gravatar_tag activity.object.email, :size => 40, default: :identicon %>
+<% else %>
+  <%= image_tag "avatars/#{activity.object.avatar}", height: '45px', width: '45px' %>
+<% end %>
+
+<%= activity.user %> has become friends with <%= link_to activity.object, activity.object %>.

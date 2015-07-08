@@ -26,6 +26,7 @@ module Friendable
     friendship = find_any_friendship_with(user)
     return false if friendship.nil? || invited?(user)
     friendship.update_column(:pending, false)
+    Activity.create(user: self, object: user, activity_type: "friendship.created")
   end
 
   def invited?(user)

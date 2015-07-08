@@ -1,1 +1,2 @@
-<%= user %> added <%= link_to book.title, book %> to their to-read list.
+<%= image_tag "covers/#{activity.object.isbn}.jpg", height: '100px' %>
+<%= activity.user %> added <%= link_to activity.object.title, activity.object %> to their to-read list.

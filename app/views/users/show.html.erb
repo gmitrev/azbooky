@@ -8,9 +8,9 @@
           <div class='col-md-3 friend'>
             <%= link_to friend, title: friend.name do %>
               <% if Rails.env.production? %>
-                <%= image_tag "avatars/#{friend.avatar}", height: '45px', width: '45px' %>
-              <% else %>
                 <%= gravatar_tag friend.email, :size => 40, default: :identicon %>
+              <% else %>
+                <%= image_tag "avatars/#{friend.avatar}", height: '45px', width: '45px' %>
               <% end %>
             <% end %>
           </div>
@@ -24,8 +24,8 @@
       <div class='row'>
         <% @favourites.each do |rel| %>
           <div class='col-md-4 '>
-            <%= link_to rel.book, title: rel.book.title do %>
-              <%= image_tag "covers/#{rel.book.isbn}.jpg", class: "img-responsive"%>
+            <%= link_to rel.book, title: rel.book.title, style: 'padding: 3px;' do %>
+              <%= image_tag "covers/#{rel.book.isbn}.jpg", width: '55px', height: '83px'%>
             <% end %>
           </div>
         <% end %>
@@ -88,12 +88,11 @@
   <div class='col-lg-9'>
     <h3>Recent activity</h3>
     <% if @activities.any? %>
-      <% @activities.each do |activity| %>
-        <div class='well'>
-          <%= image_tag "covers/#{activity.object.isbn}.jpg", height: '100px' %>
-          <%= render partial: "activities/#{activity.activity_type.underscore}.html.erb", locals: { book: activity.object, user: activity.user } %>
-        </div>
-      <% end %>
+<% @activities.each do |activity| %>
+  <div class='well'>
+    <%= render partial: "activities/#{activity.activity_type.underscore}.html.erb", locals: { activity: activity } %>
+  </div>
+<% end %>
     <% else %>
       <div class="alert alert-info" role="alert">This user has not done anything yet!</div>
     <% end %>

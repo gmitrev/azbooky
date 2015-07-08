@@ -75,9 +75,6 @@
             <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'liked' }), method: :put, class: 'btn btn-success', role: 'button' do %>
               Liked it
             <% end %>
-            <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'meh' }), method: :put, class: 'btn btn-default', role: 'button' do %>
-              Meh
-            <% end %>
             <%= link_to book_relationship_path(@book, @relationship, relationship: { feeling: 'disliked' }), method: :put, class: 'btn btn-danger', role: 'button' do %>
               Disliked it
             <% end %>
